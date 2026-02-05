@@ -6,68 +6,103 @@
   <title>플로우 원데이 세미나</title>
 
   <style>
-    /* 기본 리셋 */
-    html, body { margin: 0; padding: 0; background: #0b0617; }
-    img { display: block; width: 100%; height: auto; }
-
-    /* 페이지 래퍼 (너무 넓게 늘어나는 걸 방지) */
-    .wrap {
-      max-width: 1200px;   /* 필요하면 1440 등으로 조정 */
-      margin: 0 auto;
-      background: #0b0617;
+    :root{
+      --bg: #0b0617;
+      --cta: #7c3aed; /* 보라 */
     }
 
-    /* 하단 고정 플로팅 영역 */
-    .floating-cta {
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+    }
+
+    /* "페이지 가득" + 반응형 */
+    .hero {
+      width: 100vw;         /* 화면 너비 꽉 */
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero img{
+      display: block;
+      width: 100%;
+      height: auto;         /* 비율 유지 (반응형) */
+    }
+
+    /* 하단 고정 CTA 영역 (샘플 페이지처럼) */
+    .floating-wrap{
       position: fixed;
-      left: 50%;
-      bottom: 20px;
-      transform: translateX(-50%);
-      width: min(92vw, 520px);
+      left: 0;
+      right: 0;
+      bottom: 0;
       z-index: 9999;
-      padding: 0 8px;
+
+      /* 버튼 뒤에 살짝 어두운 그라데이션 깔아서 이미지 위에서도 가독성 확보 */
+      padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(11,6,23,0.92), rgba(11,6,23,0));
+      backdrop-filter: blur(6px);
     }
 
-    .floating-cta a {
+    .floating-cta{
+      max-width: 720px;     /* PC에서도 너무 길어지지 않게 */
+      margin: 0 auto;
+    }
+
+    .floating-cta a{
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
 
       width: 100%;
-      height: 56px;
+      height: 72px;         /* 버튼 키움 */
+      border-radius: 999px;
 
       text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      color: #ffffff;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;      /* 글자 키움 */
+      letter-spacing: -0.2px;
 
-      border-radius: 999px;
-      background: #7c3aed; /* 보라 CTA */
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      background: var(--cta);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
     }
 
-    .floating-cta a:active { transform: translateY(1px); }
-
-    /* 버튼 때문에 콘텐츠가 가려지지 않게 아래 여백 확보 */
-    .spacer {
-      height: 96px; /* 버튼 높이+여백 만큼 */
+    .floating-cta a:hover{
+      filter: brightness(1.05);
     }
+
+    .floating-cta a:active{
+      transform: translateY(1px);
+    }
+
+    /* 버튼이 콘텐츠를 가리지 않도록 하단 여백 확보 */
+    .bottom-spacer{
+      height: 110px;
+    }
+
+    /* 큰 화면에서 이미지가 "너무 커서" 부담되면 아래 줄을 켜도 됨:
+       (기본은 '가득 차게'를 원하셔서 꺼둠)
+    */
+    /* @media (min-width: 1400px){
+      .hero{ max-width: 1400px; margin: 0 auto; }
+    } */
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <!-- 이미지 1장으로 페이지 구성 -->
-    <img src="오프라인설명회_메인.png" alt="플로우 원데이 세미나 안내 이미지" />
-    <div class="spacer" aria-hidden="true"></div>
+  <main class="hero">
+    <img src="오프라인설명회_메인.png" alt="플로우 원데이 세미나 안내" />
+    <div class="bottom-spacer" aria-hidden="true"></div>
   </main>
 
-  <!-- 하단 플로팅 버튼 -->
-  <div class="floating-cta">
-    <a href="https://share.hsforms.com/1eGY_C79xRGyRFqEJTOv__Qec1ox" target="_blank" rel="noopener noreferrer">
-      원데이 세미나 신청
-    </a>
+  <div class="floating-wrap">
+    <div class="floating-cta">
+      <a href="https://share.hsforms.com/1eGY_C79xRGyRFqEJTOv__Qec1ox" target="_blank" rel="noopener noreferrer">
+        원데이 세미나 신청
+      </a>
+    </div>
   </div>
 </body>
 </html>
